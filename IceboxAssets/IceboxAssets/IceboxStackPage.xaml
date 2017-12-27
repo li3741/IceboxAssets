@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="IceboxAssets.IceboxStackPage"
+             Title="冰箱空间"
+             xmlns:iceboxcov="clr-namespace:IceboxAssets.Converters;assembly=IceboxAssets.Converters"
+             xmlns:viewmodel="clr-namespace:IceboxAssets.ViewModel;assembly=IceboxAssets.ViewModel"
+             >
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <iceboxcov:DateTimeConverter x:Key="FreshTimeCov" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.BindingContext>
+        <viewmodel:IceboxItemsViewModel  x:Name="list_items"/>
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <StackLayout>
+            <ListView x:Name="lvBoxItems" Margin="0,0,10,0" ItemsSource="{Binding IceboxItems}">
+                <ListView.SelectedItem>
+                    <Binding Path="SelectedItem"/>
+                </ListView.SelectedItem>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Orientation="Horizontal">
+                                <BoxView WidthRequest="45" HeightRequest="45" Margin="0,2,0,2" Color="Red"></BoxView>
+                                <StackLayout VerticalOptions="Center" HorizontalOptions="FillAndExpand">
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label Text="{Binding ItemName}" FontAttributes="Bold" FontSize="Small" HorizontalOptions="StartAndExpand"></Label>
+                                        <Label Text="{Binding FreshTime,Converter={StaticResource FreshTimeCov}}" FontSize="Micro" HorizontalOptions="EndAndExpand"></Label>
+                                        <!--放入人的图标-->
+                                        <BoxView WidthRequest="22" HeightRequest="22" HorizontalOptions="End" Color="Blue"/>
+                                    </StackLayout>
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label Text="{Binding ItemRemark}" HorizontalOptions="StartAndExpand" FontSize="Micro" HorizontalTextAlignment="Center"></Label>
+                                        <Button Text="图" WidthRequest="20" HeightRequest="20" HorizontalOptions="End"/>
+                                    </StackLayout>
+                                </StackLayout>
+                                <StackLayout IsVisible="{Binding VisableTakeButton}" Orientation="Horizontal">
+                                    <Button WidthRequest="45" Text="取" BackgroundColor="LightGray"  Clicked="Take_Button_Clicked"/>
+                                </StackLayout>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <ContentView>
+                <StackLayout Orientation="Horizontal">
+                    <!--保鲜/冰冻/成员/焦耳量/饮料（按钮上有小数字提示？）-->
+                    <BoxView Color="Red" WidthRequest="45" HeightRequest="45" Margin="10,0,10,0"></BoxView>
+                    <BoxView Color="Green" WidthRequest="45" HeightRequest="45" Margin="10,0,10,0"></BoxView>
+                    <BoxView Color="Blue" WidthRequest="45" HeightRequest="45" Margin="10,0,10,0"></BoxView>
+                    <BoxView Color="Yellow" WidthRequest="45" HeightRequest="45" Margin="10,0,10,0"></BoxView>
+                    <Button Text="存" WidthRequest="45" HeightRequest="45" Margin="10,0,10,0" Clicked="Button_Clicked"></Button>
+                </StackLayout>
+            </ContentView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

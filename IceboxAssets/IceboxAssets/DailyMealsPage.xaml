@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="IceboxAssets.DailyMealsPage"
+             Title="一日三餐"
+             xmlns:viewmodel="clr-namespace:IceboxAssets.ViewModel;assembly=IceboxAssets.ViewModel"
+             >
+    <!--需要理清mysql的一对多的关系存储方式，绑定的子列表的绑定方法，mvvc模式的真正内涵和命令行模式-->
+    <ContentPage.BindingContext>
+        <viewmodel:MealItemsViewModel x:Name="list_meal"/>
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout>
+                <StackLayout>
+                    <StackLayout Orientation="Horizontal">
+                        <Button x:Name="btnPreMonth" HorizontalOptions="Start" Clicked="btnPreMonth_Clicked"></Button>
+                        <Label x:Name="lblMonth" HorizontalOptions="FillAndExpand"  HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontSize="Large"></Label>
+                        <Button x:Name="btnNextMonth" HorizontalOptions="End" Clicked="btnNextMonth_Clicked"></Button>
+                    </StackLayout>
+                    <StackLayout x:Name="stack_Calendar" Grid.Row="1" Grid.ColumnSpan="3">
+                    </StackLayout>
+                </StackLayout>
+                <StackLayout x:Name="sl_meal">
+                    <!--Group是组长,数据是队员,有多个组,每组也有多个成员,绑定的是组列表-->
+                    <ListView x:Name="lvMealItem" ItemsSource="{Binding MealItems}" IsGroupingEnabled="True" GroupShortNameBinding="{Binding ShortName}">
+                        <ListView.GroupHeaderTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <StackLayout Orientation="Horizontal" BackgroundColor="Gray">
+                                        <!--<StackLayout.HeightRequest>
+                                            <OnPlatform x:TypeArguments="x:Double" WinPhone="75" />
+                                        </StackLayout.HeightRequest>-->
+                                        <BoxView WidthRequest="30" HeightRequest="10" Color="Red" HorizontalOptions="Start"></BoxView>
+                                        <Label Text="{Binding GroupName}" HorizontalOptions="FillAndExpand" FontSize="Large" />
+                                        <Button Text="参" HorizontalOptions="End" BorderRadius="10" HeightRequest="10" /><!--参加吃饭-->
+                                        <Button Text="选" HorizontalOptions="End" BorderRadius="10" HeightRequest="10" /><!--选择菜品-->
+                                        <Button Text="煮" HorizontalOptions="End" BorderRadius="10" HeightRequest="10" Clicked="Button_Clicked"/><!--煮菜教程-->
+                                    </StackLayout>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.GroupHeaderTemplate>
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <StackLayout Orientation="Horizontal">
+                                        <BoxView WidthRequest="3" HeightRequest="20" Color="Green" HorizontalOptions="Start" Margin="0,5,0,0"></BoxView>
+                                        <Label Text="{Binding CookName}" HorizontalOptions="StartAndExpand" FontSize="Medium"/>
+                                        <Label Text="{Binding Remark}" HorizontalOptions="Fill" FontSize="Micro"/>
+                                    </StackLayout>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                        <ListView.Footer>
+                            <StackLayout>
+                                <Button HeightRequest="40" WidthRequest="40" Text="设置餐时"/><!--设置一日三餐，还是一日五餐-->
+                            </StackLayout>
+                        </ListView.Footer>
+                    </ListView>
+                </StackLayout>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="IceboxAssets.PutInIceBoxPage">
+    <ContentPage.Content>
+        <StackLayout>
+            <StackLayout>
+                <ListView>
+                    <!--购物车中已经购买的了物品，能放入冰箱的列表-->
+                </ListView>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <!--保鲜/冰冻/成员/焦耳量/饮料（按钮上有小数字提示？）-->
+                <BoxView Color="Red" WidthRequest="45" HeightRequest="45" Margin="10,0,10,0"></BoxView>
+                <BoxView Color="Green" WidthRequest="45" HeightRequest="45" Margin="10,0,10,0"></BoxView>
+                <BoxView Color="Blue" WidthRequest="45" HeightRequest="45" Margin="10,0,10,0"></BoxView>
+                <BoxView Color="Yellow" WidthRequest="45" HeightRequest="45" Margin="10,0,10,0"></BoxView>
+                <Button Text="关" WidthRequest="45" HeightRequest="45" Margin="10,0,10,0"></Button>
+                <Button Text="存" WidthRequest="45" HeightRequest="45" Margin="10,0,10,0"></Button>
+                <Button Text="扫" WidthRequest="45" HeightRequest="45" Margin="10,0,10,0" x:Name="btn_Scanner" Clicked="btn_Scanner_Clicked"/>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

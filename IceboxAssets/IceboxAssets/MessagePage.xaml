@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="IceboxAssets.MessagePage">
+    <ContentPage.Content>
+        <StackLayout>
+        <StackLayout>
+            <Label Text="Here should be display some message!" x:Name="lblMsg"/>
+        </StackLayout>
+        <StackLayout Orientation="Horizontal">
+            <Button Text="朕，知道了" Clicked="Button_Clicked" x:Name="btnBack"/>
+        </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

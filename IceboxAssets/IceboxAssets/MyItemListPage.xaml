@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="IceboxAssets.MyItemListPage"
+             Title="待购清单"
+             xmlns:viewmodel="clr-namespace:IceboxAssets.ViewModel;assembly=IceboxAssets.ViewModel"
+             >
+    <ContentPage.BindingContext>
+        <viewmodel:MyItemsViewModel/>
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <StackLayout>
+            <ListView ItemsSource="{Binding My_Items}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Orientation="Horizontal">
+                                <!--区分是物品,有些物品是能放进冰箱的-->
+                                <BoxView HeightRequest="50" WidthRequest="50" Color="Gray" HorizontalOptions="Start" Margin="0,10,0,0"/>
+                                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                                    <Label Text="{Binding ProductItem.ProductName}" FontAttributes="Bold" FontSize="Medium" HorizontalOptions="FillAndExpand" VerticalTextAlignment="Center"/>
+                                    <StackLayout Orientation="Vertical" HorizontalOptions="End">
+                                        <Label Text="{Binding WantTakeTime}" FontSize="Micro" VerticalOptions="Start" HorizontalTextAlignment="End"/>
+                                        <Label Text="{Binding Remark}" FontAttributes="Italic" FontSize="Micro" VerticalOptions="Fill"/>
+                                    </StackLayout>
+                                </StackLayout>
+                                <Button Text="购" HorizontalOptions="End" BorderRadius="10" BackgroundColor="LightBlue" Margin="0,10,0,10"/>
+                                <!--有些物品是隐私,他人在购物车看不到,点击该按钮后,加入购物车-->
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+            <ContentView>
+                <StackLayout Orientation="Horizontal">
+                    <!--添加的时候需要注意,物品有标记可见性,指定可见人-->
+                    <!--添加-->
+                    <!--全部加入购物车-->
+                    <StackLayout Orientation="Horizontal">
+                        <!--保鲜/冰冻/成员/焦耳量/饮料（按钮上有小数字提示？）-->
+                        <BoxView Color="Red" WidthRequest="45" HeightRequest="45" Margin="10,0,10,0"></BoxView>
+                        <BoxView Color="Green" WidthRequest="45" HeightRequest="45" Margin="10,0,10,0"></BoxView>
+                        <BoxView Color="Blue" WidthRequest="45" HeightRequest="45" Margin="10,0,10,0"></BoxView>
+                        <BoxView Color="Yellow" WidthRequest="45" HeightRequest="45" Margin="10,0,10,0"></BoxView>
+                        <Button Text="添" WidthRequest="45" HeightRequest="45" Margin="10,0,10,0" Clicked="Button_Clicked"></Button>
+                    </StackLayout>
+                </StackLayout>
+            </ContentView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

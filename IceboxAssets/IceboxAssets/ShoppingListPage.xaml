@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="IceboxAssets.ShoppingListPage"
+             Title="购物车"
+             xmlns:viewmodel="clr-namespace:IceboxAssets.ViewModel;assembly=IceboxAssets.ViewModel"
+             xmlns:convertmodel="clr-namespace:IceboxAssets.Converters;assembly=IceboxAssets.Converters"
+             xmlns:model="clr-namespace:IceboxAssets.Model;assembly=IceboxAssets.Model">
+    <ContentPage.BindingContext>
+        <viewmodel:ShoppingItemViewModel/>
+    </ContentPage.BindingContext>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <StackLayout>
+            <!--通过分组显示-->
+            <ListView ItemsSource="{Binding Shopping_Items}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Orientation="Horizontal">
+                                <BoxView HeightRequest="50" WidthRequest="50" Color="YellowGreen" HorizontalOptions="Start" Margin="0,10,0,0"></BoxView>
+                                <!--添加人头像-->
+                                <StackLayout HorizontalOptions="FillAndExpand" Orientation="Vertical">
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label Text="{Binding Alias}" FontAttributes="Bold" FontSize="Medium" HorizontalOptions="FillAndExpand"/>
+                                        <Label Text="{Binding WantTakeTime}" FontAttributes="Italic" FontSize="Micro" HorizontalOptions="End"/>
+                                    </StackLayout>
+                                    <Label Text="{Binding Remark}" FontSize="Small" HorizontalOptions="Center"/>
+                                </StackLayout>
+                                <Switch HorizontalOptions="End" IsToggled="{Binding ItemStatus}" Toggled="Switch_Toggled"/>
+                                <!--购买后，选择开关,标记已经买到手，开关on的时候不提示，开关off的时候，需要问用户是否误触发-->
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+            <StackLayout Orientation="Horizontal">
+                <!--分组的方式，按用户，按放入冰箱和不需要放进冰箱的,按网购/实体网购-->
+                <BoxView HeightRequest="50" WidthRequest="50" Color="Yellow"></BoxView>
+                <BoxView HeightRequest="50" WidthRequest="50" Color="Yellow"></BoxView>
+                <BoxView HeightRequest="50" WidthRequest="50" Color="Yellow"></BoxView>
+                <!--如果准备购物，可以锁定需要购买的物品，这样避免重复-->
+                <BoxView HeightRequest="50" WidthRequest="50" Color="Yellow"></BoxView>
+                <Button Text="付" WidthRequest="45" HeightRequest="45" Margin="10,0,10,0" ></Button>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
